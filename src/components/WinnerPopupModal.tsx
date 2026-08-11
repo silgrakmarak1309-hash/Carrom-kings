@@ -70,7 +70,8 @@ export const WinnerPopupModal: React.FC<WinnerPopupModalProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] bg-slate-950/60 flex items-center justify-center p-4 select-none"
+        className="fixed inset-0 z-[9999] bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4 select-none pointer-events-auto"
+        style={{ pointerEvents: 'auto' }}
       >
         {/* Card Overlay Wrapper */}
         <motion.div
@@ -78,13 +79,14 @@ export const WinnerPopupModal: React.FC<WinnerPopupModalProps> = ({
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.8, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 350, damping: 22 }}
-          className={`relative w-full max-w-sm rounded-3xl p-6 shadow-2xl text-center space-y-4 text-slate-100 border-2 overflow-hidden ${
+          className={`relative w-full max-w-sm rounded-3xl p-6 shadow-2xl text-center space-y-4 text-slate-100 border-2 overflow-hidden pointer-events-auto z-[9999] ${
             isPlayerWin || isPuzzleCleared
               ? 'bg-slate-900/95 border-amber-400/80 shadow-[0_0_60px_rgba(251,191,36,0.35)]'
               : isAiWin || isPuzzleFailed
               ? 'bg-slate-900/95 border-rose-500/80 shadow-[0_0_60px_rgba(244,63,94,0.35)]'
               : 'bg-slate-900/95 border-emerald-500/80 shadow-[0_0_60px_rgba(16,185,129,0.35)]'
           }`}
+          style={{ pointerEvents: 'auto' }}
         >
           {/* Confetti Particle Animations on Win */}
           {(isPlayerWin || isPuzzleCleared) && (
@@ -241,7 +243,7 @@ export const WinnerPopupModal: React.FC<WinnerPopupModalProps> = ({
           )}
 
           {/* Action Buttons */}
-          <div className="relative z-10 flex flex-col gap-2 pt-2">
+          <div className="relative z-30 flex flex-col gap-2 pt-2 pointer-events-auto">
             {mode === 'puzzle' && isPuzzleCleared && currentPuzzleIndex < 19 && onNextLevel && (
               <button
                 type="button"
@@ -249,7 +251,8 @@ export const WinnerPopupModal: React.FC<WinnerPopupModalProps> = ({
                   e.stopPropagation();
                   onNextLevel();
                 }}
-                className="w-full py-3 bg-purple-500 hover:bg-purple-400 text-slate-950 font-black rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95 cursor-pointer"
+                className="w-full py-3 bg-purple-500 hover:bg-purple-400 text-slate-950 font-black rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95 cursor-pointer pointer-events-auto relative z-30"
+                style={{ pointerEvents: 'auto' }}
               >
                 <span>Next Level</span>
                 <ArrowRight className="w-4 h-4" />
@@ -262,11 +265,12 @@ export const WinnerPopupModal: React.FC<WinnerPopupModalProps> = ({
                 e.stopPropagation();
                 onPlayAgain();
               }}
-              className={`w-full py-3 font-black rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95 cursor-pointer ${
+              className={`w-full py-3 font-black rounded-xl text-sm flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95 cursor-pointer pointer-events-auto relative z-30 ${
                 isPlayerWin || isPuzzleCleared
                   ? 'bg-amber-400 hover:bg-amber-300 text-slate-950'
                   : 'bg-rose-500 hover:bg-rose-400 text-white'
               }`}
+              style={{ pointerEvents: 'auto' }}
             >
               <RotateCcw className="w-4 h-4" />
               <span>
@@ -284,9 +288,10 @@ export const WinnerPopupModal: React.FC<WinnerPopupModalProps> = ({
                 e.stopPropagation();
                 onOpenModeSelect();
               }}
-              className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl text-xs flex items-center justify-center gap-2 transition-transform active:scale-95 cursor-pointer border border-slate-700/60"
+              className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-extrabold rounded-xl text-xs flex items-center justify-center gap-2 transition-transform active:scale-95 cursor-pointer border border-slate-700/80 pointer-events-auto relative z-30"
+              style={{ pointerEvents: 'auto' }}
             >
-              <List className="w-3.5 h-3.5" />
+              <List className="w-4 h-4 text-amber-400" />
               <span>Select Mode / Level</span>
             </button>
           </div>

@@ -10,8 +10,11 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl p-6 shadow-2xl text-slate-100 relative max-h-[85vh] overflow-y-auto">
+    <div
+      className="fixed inset-0 z-[9999] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 pointer-events-auto"
+      style={{ pointerEvents: 'auto' }}
+    >
+      <div className="w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl p-6 shadow-2xl text-slate-100 relative max-h-[85vh] overflow-y-auto pointer-events-auto z-[9999]">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-lg"

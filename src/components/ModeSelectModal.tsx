@@ -26,8 +26,14 @@ export const ModeSelectModal: React.FC<ModeSelectModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
-      <div className="w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-2xl p-5 shadow-2xl text-slate-100 relative max-h-[90vh] flex flex-col">
+    <div
+      className="fixed inset-0 z-[9999] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 pointer-events-auto select-none"
+      style={{ pointerEvents: 'auto' }}
+    >
+      <div
+        className="w-full max-w-lg bg-slate-900 border border-slate-700/80 rounded-2xl p-5 shadow-2xl text-slate-100 relative max-h-[90vh] flex flex-col pointer-events-auto z-[9999]"
+        style={{ pointerEvents: 'auto' }}
+      >
         <button
           onClick={onClose}
           className="absolute top-4 right-4 p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-lg z-10"

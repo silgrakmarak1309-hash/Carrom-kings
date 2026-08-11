@@ -68,12 +68,16 @@ export const HUD: React.FC<HUDProps> = ({
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto mb-2 px-3 py-2 bg-slate-900/90 backdrop-blur-md border border-slate-700/60 rounded-xl shadow-xl flex items-center justify-between text-slate-100 gap-2">
+    <div
+      className="w-full max-w-xl mx-auto mb-2 px-3 py-2 bg-slate-900/90 backdrop-blur-md border border-slate-700/60 rounded-xl shadow-xl flex items-center justify-between text-slate-100 gap-2 relative z-30 pointer-events-auto"
+      style={{ pointerEvents: 'auto' }}
+    >
       {/* Back to Dashboard Button */}
       <button
         type="button"
         onClick={onBackToDashboard}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/80 font-black text-xs rounded-lg transition-transform active:scale-95 cursor-pointer shadow-sm shrink-0"
+        className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/80 font-black text-xs rounded-lg transition-transform active:scale-95 cursor-pointer shadow-sm shrink-0 pointer-events-auto relative z-30"
+        style={{ pointerEvents: 'auto' }}
         title="Return to Dashboard"
       >
         <ArrowLeft className="w-4 h-4 text-amber-400" />

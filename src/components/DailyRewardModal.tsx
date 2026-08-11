@@ -94,12 +94,15 @@ export const DailyRewardModal: React.FC<DailyRewardModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+      <div
+        className="fixed inset-0 z-[9999] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4 pointer-events-auto"
+        style={{ pointerEvents: 'auto' }}
+      >
         <motion.div
           initial={{ scale: 0.9, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          className="w-full max-w-lg bg-slate-900 border border-amber-500/50 rounded-2xl p-5 shadow-2xl text-slate-100 relative flex flex-col overflow-hidden"
+          className="w-full max-w-lg bg-slate-900 border border-amber-500/50 rounded-2xl p-5 shadow-2xl text-slate-100 relative flex flex-col overflow-hidden pointer-events-auto z-[9999]"
         >
           {/* Subtle Golden Glow Header */}
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-amber-500/15 via-amber-500/5 to-transparent pointer-events-none" />

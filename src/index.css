@@ -16,10 +16,31 @@ html, body, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  -webkit-overflow-scrolling: auto;
 }
 
-canvas, .touch-none, [data-touch-none="true"] {
+/* Ensure all buttons, links, inputs, and modals are 100% clickable and interactive */
+button,
+a,
+input,
+select,
+textarea,
+[role="button"],
+.pointer-events-auto,
+.modal-overlay,
+[role="dialog"] {
+  pointer-events: auto !important;
+  touch-action: manipulation;
+}
+
+/* Modal container overlay stack */
+.z-modal {
+  z-index: 9999 !important;
+  pointer-events: auto !important;
+}
+
+/* Targeted touch-action restricted strictly to the game canvas for striker dragging */
+canvas,
+#carrom-board-canvas {
   touch-action: none !important;
   overscroll-behavior: none !important;
   -webkit-touch-callout: none !important;
