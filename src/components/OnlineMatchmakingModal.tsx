@@ -218,21 +218,9 @@ export const OnlineMatchmakingModal: React.FC<OnlineMatchmakingModalProps> = ({
 
         {/* Error / Insufficient Coins Alert Banner */}
         {errorMessage && (
-          <div className="mb-4 p-3 bg-rose-950/90 border border-rose-500/70 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2 text-rose-200 text-xs font-bold shadow-lg">
-            <div className="flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
-              <span>{errorMessage}</span>
-            </div>
-            <button
-              onClick={() => {
-                onAddCoins(50);
-                setErrorMessage(null);
-              }}
-              className="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-lg text-xs flex items-center gap-1 transition-transform active:scale-95 cursor-pointer shrink-0"
-            >
-              <Plus className="w-3.5 h-3.5 stroke-[3]" />
-              <span>Claim Free +50 Coins</span>
-            </button>
+          <div className="mb-4 p-3 bg-rose-950/90 border border-rose-500/70 rounded-xl flex items-center gap-2 text-rose-200 text-xs font-bold shadow-lg">
+            <AlertCircle className="w-4 h-4 shrink-0 text-rose-400" />
+            <span>{errorMessage}</span>
           </div>
         )}
 
