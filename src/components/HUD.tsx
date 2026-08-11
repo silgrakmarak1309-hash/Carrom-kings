@@ -132,13 +132,12 @@ export const HUD: React.FC<HUDProps> = ({
             type="button"
             onClick={handleAction(onOpenCoinStore)}
             onTouchEnd={handleAction(onOpenCoinStore)}
-            className="flex items-center gap-1 px-1.5 py-1 bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 rounded-lg text-amber-300 font-black text-xs transition-transform active:scale-95 cursor-pointer shrink-0 pointer-events-auto touch-manipulation relative z-[10001]"
+            className="flex items-center gap-1 px-2 py-1 bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 rounded-lg text-amber-300 font-black text-xs transition-transform active:scale-95 cursor-pointer shrink-0 pointer-events-auto touch-manipulation relative z-[10001]"
             style={{ pointerEvents: 'auto' }}
             title="Open Coin Store"
           >
             <Coins className="w-3.5 h-3.5 text-amber-400" />
             <span className="text-[11px]">{playerCoins}</span>
-            <span className="w-3.5 h-3.5 bg-amber-500 text-slate-950 rounded flex items-center justify-center font-black text-[10px] leading-none ml-0.5">+</span>
           </button>
         )}
       </div>

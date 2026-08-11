@@ -48,4 +48,27 @@ canvas,
   -webkit-user-select: none !important;
 }
 
+/* Completely hide/remove any WebIntoApp default loading or splash overlay elements */
+#webintoapp-loading,
+.webintoapp-loading,
+[id*="webintoapp"],
+[class*="webintoapp"],
+#via-loading,
+.via-loading,
+[id*="via-loading"],
+[class*="via-loading"],
+#via-splash,
+.via-splash,
+.via-app-loading,
+#via-app-loading,
+#loading-overlay,
+.loading-overlay,
+#app-loading-screen {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: -99999 !important;
+}
+
 

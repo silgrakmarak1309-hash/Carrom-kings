@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GameMode, OnlineRoomSession } from '../types';
-import { Bot, Puzzle, Trophy, Target, User, Volume2, VolumeX, HelpCircle, Play, Globe, Zap, Coins, Plus, Gift, Sparkles, Palette } from 'lucide-react';
+import { Bot, Puzzle, Trophy, Target, User, Volume2, VolumeX, HelpCircle, Play, Globe, Zap, Coins, Gift, Sparkles, Palette } from 'lucide-react';
 import { AdBanner } from './AdBanner';
 import { OnlineMatchmakingModal } from './OnlineMatchmakingModal';
 import { CrownLogo } from './CrownLogo';
@@ -93,26 +93,11 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <div
             onClick={onOpenCoinStore}
             onTouchEnd={onOpenCoinStore}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 bg-amber-950/80 border border-amber-500/50 rounded-xl text-amber-300 font-black text-xs shadow-md cursor-pointer hover:border-amber-400 transition-transform active:scale-95 touch-manipulation"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-950/80 border border-amber-500/50 rounded-xl text-amber-300 font-black text-xs shadow-md cursor-pointer hover:border-amber-400 transition-transform active:scale-95 touch-manipulation"
             title="Open Coin Store / Get Coins"
           >
             <Coins className="w-4 h-4 text-amber-400 animate-bounce" />
             <span>{playerCoins}</span>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.stopPropagation();
-                onOpenCoinStore?.();
-              }}
-              onTouchEnd={(e) => {
-                e.stopPropagation();
-                onOpenCoinStore?.();
-              }}
-              className="ml-1 p-0.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-300 text-slate-950 rounded-md transition-transform active:scale-90 cursor-pointer pointer-events-auto touch-manipulation"
-              title="Open Coin Store / Get Free Coins"
-            >
-              <Plus className="w-3 h-3 stroke-[3]" />
-            </button>
           </div>
 
           {/* Mute Button */}
