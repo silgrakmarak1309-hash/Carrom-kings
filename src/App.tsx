@@ -951,6 +951,20 @@ export default function App() {
     setTimeout(() => setActiveReaction(null), 2500);
   };
 
+  // Prevent page pull-to-refresh and touch scrolling globally during game view
+  useEffect(() => {
+    const handleGlobalTouchMove = (e: TouchEvent) => {
+      if (viewState === 'game' && e.cancelable) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('touchmove', handleGlobalTouchMove, { passive: false });
+    return () => {
+      document.removeEventListener('touchmove', handleGlobalTouchMove);
+    };
+  }, [viewState]);
+
   // Return to Dashboard safely stopping current physics/AI state
   const handleBackToDashboard = useCallback(() => {
     if (mode === 'online' && onlineSession) {
@@ -967,7 +981,10 @@ export default function App() {
   }, [mode, onlineSession]);
 
   return (
-    <div className="relative w-screen h-screen flex flex-col items-center justify-between bg-slate-950 text-slate-100 font-sans overflow-hidden select-none">
+    <div
+      className="relative w-screen h-screen flex flex-col items-center justify-between bg-slate-950 text-slate-100 font-sans overflow-hidden select-none touch-none"
+      style={{ touchAction: 'none', overscrollBehavior: 'none' }}
+    >
       {viewState === 'dashboard' ? (
         <div className="w-full h-full overflow-y-auto py-2">
           <Dashboard
@@ -993,7 +1010,10 @@ export default function App() {
           />
         </div>
       ) : (
-        <div className="w-full h-full flex flex-col items-center justify-between py-2 px-3 overflow-hidden">
+        <div
+          className="w-full h-full flex flex-col items-center justify-between py-2 px-3 overflow-hidden touch-none select-none"
+          style={{ touchAction: 'none', overscrollBehavior: 'none' }}
+        >
           {/* Top HUD Header */}
           <HUD
             p1Score={p1Score}

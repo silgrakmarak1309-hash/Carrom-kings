@@ -575,8 +575,8 @@ export const CarromBoardCanvas: React.FC<CarromBoardCanvasProps> = ({
     };
 
     const onTouchMove = (e: TouchEvent) => {
-      if (!isDraggingRef.current || isPhysicsRunning || isAiTurn || disabled) return;
       if (e.cancelable) e.preventDefault();
+      if (!isDraggingRef.current || isPhysicsRunning || isAiTurn || disabled) return;
       if (!e.touches || e.touches.length === 0) return;
 
       const touch = e.touches[0];
@@ -587,8 +587,8 @@ export const CarromBoardCanvas: React.FC<CarromBoardCanvasProps> = ({
     };
 
     const onTouchEnd = (e: TouchEvent) => {
-      if (!isDraggingRef.current) return;
       if (e.cancelable) e.preventDefault();
+      if (!isDraggingRef.current) return;
       isDraggingRef.current = false;
 
       if (isPhysicsRunning || isAiTurn) return;
@@ -641,7 +641,8 @@ export const CarromBoardCanvas: React.FC<CarromBoardCanvasProps> = ({
   return (
     <div
       ref={containerRef}
-      className="relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto touch-none select-none"
+      className="relative flex flex-col items-center justify-center w-full max-w-2xl mx-auto touch-none select-none overflow-hidden"
+      style={{ touchAction: 'none', overscrollBehavior: 'none' }}
     >
       <canvas
         ref={canvasRef}
@@ -649,6 +650,7 @@ export const CarromBoardCanvas: React.FC<CarromBoardCanvasProps> = ({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         className="block rounded-lg shadow-2xl cursor-crosshair border border-amber-900/40 bg-amber-950 touch-none"
+        style={{ touchAction: 'none', overscrollBehavior: 'none' }}
       />
     </div>
   );

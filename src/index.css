@@ -11,12 +11,20 @@ html, body, #root {
   position: fixed;
   top: 0;
   left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
+  -webkit-overflow-scrolling: auto;
 }
 
-canvas {
-  touch-action: none;
+canvas, .touch-none, [data-touch-none="true"] {
+  touch-action: none !important;
+  overscroll-behavior: none !important;
+  -webkit-touch-callout: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
 }
+
 
