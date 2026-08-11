@@ -27,6 +27,7 @@ import { initAdMob, showInterstitialAd } from './utils/admob';
 import { AdBanner } from './components/AdBanner';
 import { getOnlineSocket } from './services/onlineSocket';
 import { DailyRewardModal, getDailyRewardState } from './components/DailyRewardModal';
+import { CoinStoreModal } from './components/CoinStoreModal';
 import { RotateCcw, Trophy, Sparkles, Frown, ArrowRight, List, Globe, Zap, Smile } from 'lucide-react';
 
 // Helper to find a non-overlapping spot near board center (400, 400) for refunded coins
@@ -158,6 +159,7 @@ export default function App() {
   const [isRulesModalOpen, setIsRulesModalOpen] = useState<boolean>(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState<boolean>(false);
   const [isCustomizeModalOpen, setIsCustomizeModalOpen] = useState<boolean>(false);
+  const [isCoinStoreOpen, setIsCoinStoreOpen] = useState<boolean>(false);
   const [isDailyRewardOpen, setIsDailyRewardOpen] = useState<boolean>(() => {
     try {
       return !getDailyRewardState().isClaimedToday;
@@ -990,6 +992,7 @@ export default function App() {
             onSelectMode={handleSelectMode}
             onOpenPuzzleSelector={() => setIsModeModalOpen(true)}
             onOpenDailyReward={() => setIsDailyRewardOpen(true)}
+            onOpenCoinStore={() => setIsCoinStoreOpen(true)}
           />
         </div>
       ) : (
@@ -1038,6 +1041,7 @@ export default function App() {
             onOpenRules={() => setIsRulesModalOpen(true)}
             onOpenProfile={() => setIsProfileModalOpen(true)}
             onBackToDashboard={handleBackToDashboard}
+            onOpenCoinStore={() => setIsCoinStoreOpen(true)}
           />
 
           {/* Main Game Board Container */}
@@ -1187,6 +1191,15 @@ export default function App() {
         onClose={() => setIsDailyRewardOpen(false)}
         playerCoins={playerCoins}
         onClaimReward={(amount) => handleAddCoins(amount)}
+      />
+
+      {/* Coin Store Modal */}
+      <CoinStoreModal
+        isOpen={isCoinStoreOpen}
+        onClose={() => setIsCoinStoreOpen(false)}
+        playerCoins={playerCoins}
+        onAddCoins={handleAddCoins}
+        onOpenDailyReward={() => setIsDailyRewardOpen(true)}
       />
 
       {/* Game Over Result Popup */}
