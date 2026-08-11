@@ -1,0 +1,8 @@
+{
+  "name": "Remix Carrom Pro",
+  "description": "A professional, realistic Carrom game with single player, vs CPU, puzzle, and practice modes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
