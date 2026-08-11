@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { GameMode, Piece, TurnPlayer, Vec2, OnlineRoomSession, BoardStyle, PieceStyle } from './types';
+import { GameMode, Piece, TurnPlayer, Vec2, OnlineRoomSession, BoardStyle, PieceStyle, UserAccount } from './types';
+import { AuthModal } from './components/AuthModal';
 import { CarromBoardCanvas } from './components/CarromBoardCanvas';
 import { StrikerControlBar } from './components/StrikerControlBar';
 import { HUD } from './components/HUD';
@@ -158,6 +159,7 @@ export default function App() {
   const [isModeModalOpen, setIsModeModalOpen] = useState<boolean>(false);
   const [isRulesModalOpen, setIsRulesModalOpen] = useState<boolean>(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState<boolean>(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false);
   const [isCustomizeModalOpen, setIsCustomizeModalOpen] = useState<boolean>(false);
   const [isCoinStoreOpen, setIsCoinStoreOpen] = useState<boolean>(false);
   const [isDailyRewardOpen, setIsDailyRewardOpen] = useState<boolean>(() => {
@@ -167,6 +169,49 @@ export default function App() {
       return false;
     }
   });
+
+  // User Account & Sign-In State
+  const [currentAccount, setCurrentAccount] = useState<UserAccount | null>(() => {
+    try {
+      const saved = localStorage.getItem('carrom_user_account');
+      if (saved) return JSON.parse(saved);
+    } catch (e) {
+      console.error(e);
+    }
+    return null;
+  });
+
+  const handleSignIn = (account: UserAccount) => {
+    setCurrentAccount(account);
+    setProfileName(account.displayName);
+    if (account.photoURL) {
+      setProfileImage(account.photoURL);
+    }
+    if (account.coins !== undefined) {
+      setPlayerCoins(account.coins);
+      localStorage.setItem('carrom_player_coins', account.coins.toString());
+    }
+    if (account.puzzleLevel !== undefined) {
+      setUnlockedPuzzleLevel(account.puzzleLevel);
+      localStorage.setItem('carrom_unlocked_puzzle_level', account.puzzleLevel.toString());
+    }
+    try {
+      localStorage.setItem('carrom_user_account', JSON.stringify(account));
+    } catch (e) {
+      console.error(e);
+    }
+    showToast(`Welcome ${account.displayName}! Account synced. 🏆`);
+  };
+
+  const handleSignOut = () => {
+    setCurrentAccount(null);
+    try {
+      localStorage.removeItem('carrom_user_account');
+    } catch (e) {
+      console.error(e);
+    }
+    showToast('Signed out of account.');
+  };
 
   // Customization Styles State
   const [boardStyle, setBoardStyle] = useState<BoardStyle>(() => {
@@ -983,6 +1028,8 @@ export default function App() {
             profileImage={profileImage}
             profileName={profileName}
             playerCoins={playerCoins}
+            currentAccount={currentAccount}
+            onOpenAuthModal={() => setIsAuthModalOpen(true)}
             onDeductCoins={handleDeductCoins}
             onAddCoins={handleAddCoins}
             isMuted={isMuted}
@@ -1180,6 +1227,17 @@ export default function App() {
         onUpdateProfileImage={handleUpdateProfileImage}
         profileName={profileName}
         onUpdateProfileName={handleUpdateProfileName}
+        currentAccount={currentAccount}
+        onOpenAuthModal={() => setIsAuthModalOpen(true)}
+      />
+
+      {/* User Account / Sign In Modal */}
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        currentAccount={currentAccount}
+        onSignIn={handleSignIn}
+        onSignOut={handleSignOut}
       />
 
       {/* Customize Board & Piece Styles Modal */}

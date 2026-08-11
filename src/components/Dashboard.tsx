@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { GameMode, OnlineRoomSession } from '../types';
-import { Bot, Puzzle, Trophy, Target, User, Volume2, VolumeX, HelpCircle, Play, Globe, Zap, Coins, Gift, Sparkles, Palette } from 'lucide-react';
+import { GameMode, OnlineRoomSession, UserAccount } from '../types';
+import { Bot, Puzzle, Trophy, Target, User, Volume2, VolumeX, HelpCircle, Play, Globe, Zap, Coins, Gift, Sparkles, Palette, ShieldCheck } from 'lucide-react';
 import { AdBanner } from './AdBanner';
 import { OnlineMatchmakingModal } from './OnlineMatchmakingModal';
 import { CrownLogo } from './CrownLogo';
@@ -9,6 +9,8 @@ interface DashboardProps {
   profileImage: string | null;
   profileName: string;
   playerCoins: number;
+  currentAccount?: UserAccount | null;
+  onOpenAuthModal?: () => void;
   onDeductCoins: (amount: number) => void;
   onAddCoins: (amount: number) => void;
   isMuted: boolean;
@@ -29,6 +31,8 @@ export const Dashboard: React.FC<DashboardProps> = ({
   profileImage,
   profileName,
   playerCoins,
+  currentAccount,
+  onOpenAuthModal,
   onDeductCoins,
   onAddCoins,
   isMuted,
@@ -65,6 +69,27 @@ export const Dashboard: React.FC<DashboardProps> = ({
 
         {/* Action Controls & Profile / Coins */}
         <div className="flex items-center gap-1.5 sm:gap-2">
+          {/* Account Sign In / Sync Button */}
+          {onOpenAuthModal && (
+            <button
+              type="button"
+              onClick={onOpenAuthModal}
+              className={`flex items-center gap-1 px-2.5 py-1.5 border rounded-xl text-xs font-black transition-transform active:scale-95 cursor-pointer shadow-md ${
+                currentAccount && currentAccount.provider !== 'guest'
+                  ? 'bg-emerald-950/80 border-emerald-500/60 text-emerald-300 hover:bg-emerald-900'
+                  : 'bg-amber-500/20 border-amber-500/50 text-amber-300 hover:bg-amber-500/30'
+              }`}
+              title="Account & Google / Email Sign-In"
+            >
+              <ShieldCheck className="w-3.5 h-3.5" />
+              <span className="hidden md:inline">
+                {currentAccount && currentAccount.provider !== 'guest' ? currentAccount.displayName : 'SIGN IN'}
+              </span>
+              <span className="md:hidden">
+                {currentAccount && currentAccount.provider !== 'guest' ? 'ACCOUNT' : 'SIGN IN'}
+              </span>
+            </button>
+          )}
           {/* Customize / Shop Button */}
           <button
             type="button"

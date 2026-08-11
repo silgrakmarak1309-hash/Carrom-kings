@@ -1,0 +1,17 @@
+{
+  "entities": {
+    "users": {
+      "fields": {
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "provider": { "type": "string" },
+        "coins": { "type": "number" },
+        "matchesPlayed": { "type": "number" },
+        "matchesWon": { "type": "number" },
+        "puzzleLevel": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  }
+}

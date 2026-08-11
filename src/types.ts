@@ -109,6 +109,19 @@ export interface OnlineRoomPlayer {
   role: 'player1' | 'player2';
 }
 
+export interface UserAccount {
+  id: string;
+  email: string;
+  displayName: string;
+  photoURL?: string | null;
+  provider: 'google' | 'email' | 'guest';
+  coins: number;
+  matchesPlayed: number;
+  matchesWon: number;
+  puzzleLevel: number;
+  createdAt: string;
+}
+
 export interface OnlineRoomSession {
   roomId: string;
   myRole: 'player1' | 'player2';

@@ -186,11 +186,11 @@ export const HUD: React.FC<HUDProps> = ({
           type="button"
           onClick={handleAction(onOpenRules)}
           onTouchEnd={handleAction(onOpenRules)}
-          className="p-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-slate-300 transition-transform active:scale-95 cursor-pointer pointer-events-auto z-[10001] touch-manipulation"
-          style={{ pointerEvents: 'auto' }}
+          className="p-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-slate-300 transition-transform active:scale-95 cursor-pointer pointer-events-auto relative z-[25000] touch-manipulation"
+          style={{ pointerEvents: 'auto', zIndex: 25000 }}
           title="Rules & How to Play"
         >
-          <HelpCircle className="w-4 h-4" />
+          <HelpCircle className="w-4 h-4 text-amber-300 hover:text-amber-200" />
         </button>
 
         <button
