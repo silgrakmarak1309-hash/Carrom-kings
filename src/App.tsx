@@ -9,6 +9,7 @@ import { RulesModal } from './components/RulesModal';
 import { WinnerPopupModal } from './components/WinnerPopupModal';
 import { ProfileModal } from './components/ProfileModal';
 import { CustomizeModal } from './components/CustomizeModal';
+import { SplashScreen } from './components/SplashScreen';
 import {
   BASELINE_LEFT,
   BASELINE_RIGHT,
@@ -148,6 +149,9 @@ export default function App() {
   // Physics & Animation State
   const [isPhysicsRunning, setIsPhysicsRunning] = useState<boolean>(false);
   const [isMuted, setIsMuted] = useState<boolean>(false);
+
+  // Splash Screen State
+  const [showSplash, setShowSplash] = useState<boolean>(true);
 
   // Modals & Toast State
   const [isModeModalOpen, setIsModeModalOpen] = useState<boolean>(false);
@@ -1204,6 +1208,9 @@ export default function App() {
           });
         }}
       />
+
+      {/* Splash / Loading Screen */}
+      {showSplash && <SplashScreen onFinish={() => setShowSplash(false)} />}
     </div>
   );
 }
