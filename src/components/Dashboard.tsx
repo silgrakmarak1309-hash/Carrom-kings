@@ -89,14 +89,12 @@ export const Dashboard: React.FC<DashboardProps> = ({
             <span className="sm:hidden">BONUS</span>
           </button>
 
-          {/* Player Coins Wallet Display */}
+          {/* Player Coins Balance Display */}
           <div
-            onClick={onOpenCoinStore}
-            onTouchEnd={onOpenCoinStore}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-950/80 border border-amber-500/50 rounded-xl text-amber-300 font-black text-xs shadow-md cursor-pointer hover:border-amber-400 transition-transform active:scale-95 touch-manipulation"
-            title="Open Coin Store / Get Coins"
+            className="flex items-center gap-1.5 px-3 py-1.5 bg-amber-950/80 border border-amber-500/50 rounded-xl text-amber-300 font-black text-xs shadow-md select-none"
+            title="Current Coin Balance"
           >
-            <Coins className="w-4 h-4 text-amber-400 animate-bounce" />
+            <Coins className="w-4 h-4 text-amber-400" />
             <span>{playerCoins}</span>
           </div>
 

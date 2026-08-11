@@ -126,20 +126,14 @@ export const HUD: React.FC<HUDProps> = ({
           </div>
         </div>
 
-        {/* Coins Wallet Button */}
-        {onOpenCoinStore && (
-          <button
-            type="button"
-            onClick={handleAction(onOpenCoinStore)}
-            onTouchEnd={handleAction(onOpenCoinStore)}
-            className="flex items-center gap-1 px-2 py-1 bg-amber-950/80 hover:bg-amber-900 border border-amber-500/50 rounded-lg text-amber-300 font-black text-xs transition-transform active:scale-95 cursor-pointer shrink-0 pointer-events-auto touch-manipulation relative z-[10001]"
-            style={{ pointerEvents: 'auto' }}
-            title="Open Coin Store"
-          >
-            <Coins className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-[11px]">{playerCoins}</span>
-          </button>
-        )}
+        {/* Coins Balance Display */}
+        <div
+          className="flex items-center gap-1 px-2.5 py-1 bg-amber-950/80 border border-amber-500/50 rounded-lg text-amber-300 font-black text-xs shrink-0 select-none shadow-sm"
+          title="Current Coin Balance"
+        >
+          <Coins className="w-3.5 h-3.5 text-amber-400" />
+          <span className="text-[11px]">{playerCoins}</span>
+        </div>
       </div>
 
       {/* Middle Game Status */}
