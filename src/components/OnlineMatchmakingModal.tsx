@@ -129,24 +129,45 @@ export const OnlineMatchmakingModal: React.FC<OnlineMatchmakingModalProps> = ({
     socket.emit('quick_match', { name: playerName, image: playerImage });
   };
 
-  const handleCreateRoom = () => {
+  const handleCreateRoom = (e?: React.SyntheticEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (!checkSufficientCoins()) return;
     setErrorMessage(null);
     setIsCreatingRoom(true);
+    const newCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+    setRoomCode(newCode);
     const socket = getOnlineSocket();
-    socket.emit('create_room', { name: playerName, image: playerImage });
+    socket.emit('create_room', { name: playerName, image: playerImage, customRoomId: newCode });
   };
 
-  const handleJoinRoom = () => {
-    if (inputRoomCode.trim().length !== 6) return;
+  const handleJoinRoom = (e?: React.SyntheticEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    const cleanCode = inputRoomCode.trim().toUpperCase();
+    if (cleanCode.length < 4) {
+      setErrorMessage('Please enter a valid 6-character room code.');
+      return;
+    }
     if (!checkSufficientCoins()) return;
     setErrorMessage(null);
     const socket = getOnlineSocket();
     socket.emit('join_room', {
-      roomId: inputRoomCode.trim(),
+      roomId: cleanCode,
       name: playerName,
       image: playerImage,
     });
+    setIsSearching(true);
+  };
+
+  const handleRulesToggle = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowHowToPlay((prev) => !prev);
   };
 
   const handleCopyCode = () => {
@@ -190,8 +211,11 @@ export const OnlineMatchmakingModal: React.FC<OnlineMatchmakingModalProps> = ({
           </div>
 
           <button
-            onClick={() => setShowHowToPlay((prev) => !prev)}
-            className="px-2.5 py-1.5 bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/50 text-indigo-300 hover:text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer shrink-0"
+            type="button"
+            onClick={handleRulesToggle}
+            onTouchEnd={handleRulesToggle}
+            className="px-2.5 py-1.5 bg-indigo-950/80 hover:bg-indigo-900 border border-indigo-500/50 text-indigo-300 hover:text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all shadow-md cursor-pointer shrink-0 touch-manipulation z-[30000] pointer-events-auto"
+            style={{ pointerEvents: 'auto', zIndex: 30000 }}
             title="How to Play Online"
           >
             <HelpCircle className="w-4 h-4 text-indigo-400" />
@@ -199,6 +223,77 @@ export const OnlineMatchmakingModal: React.FC<OnlineMatchmakingModalProps> = ({
             {showHowToPlay ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
           </button>
         </div>
+
+        {/* Carrom Rules Popup Overlay */}
+        {showHowToPlay && (
+          <div
+            className="absolute inset-0 bg-slate-950/95 backdrop-blur-md rounded-2xl p-5 z-[35000] flex flex-col pointer-events-auto overflow-y-auto animate-fadeIn"
+            style={{ pointerEvents: 'auto', zIndex: 35000 }}
+          >
+            <div className="flex items-center justify-between mb-3 border-b border-slate-800 pb-2">
+              <div className="flex items-center gap-2">
+                <HelpCircle className="w-5 h-5 text-amber-400" />
+                <h3 className="text-sm font-black text-amber-300 tracking-wide uppercase">Carrom Rules & Instructions</h3>
+              </div>
+              <button
+                type="button"
+                onClick={handleRulesToggle}
+                onTouchEnd={handleRulesToggle}
+                className="p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-lg cursor-pointer touch-manipulation"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="space-y-3 text-xs text-slate-300 leading-relaxed overflow-y-auto pr-1">
+              <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800">
+                <div className="font-bold text-amber-300 text-xs mb-1 flex items-center gap-1.5">
+                  <Zap className="w-3.5 h-3.5 text-amber-400" />
+                  <span>Aiming & Striking</span>
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  1. Drag the bottom slider to align your striker on your baseline.
+                  <br />
+                  2. Pull back on the striker to set shot power and aim direction.
+                  <br />
+                  3. Release to shoot smoothly.
+                </p>
+              </div>
+
+              <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800">
+                <div className="font-bold text-emerald-300 text-xs mb-1 flex items-center gap-1.5">
+                  <Award className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>Coin Scoring</span>
+                </div>
+                <div className="text-[11px] text-slate-400 space-y-0.5">
+                  <p>• White Coin: <strong>+10 Points</strong></p>
+                  <p>• Black Coin: <strong>+5 Points</strong></p>
+                  <p>• Red Queen: <strong>+30 Points</strong> (Must pocket another coin to cover the Queen!)</p>
+                </div>
+              </div>
+
+              <div className="p-3 bg-slate-900/90 rounded-xl border border-slate-800">
+                <div className="font-bold text-rose-300 text-xs mb-1 flex items-center gap-1.5">
+                  <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
+                  <span>Fouls & Penalty</span>
+                </div>
+                <p className="text-[11px] text-slate-400">
+                  Pocketing your striker is a Foul. 1 of your pocketed coins will return to the center circle as a penalty. Pocketing an opponent's coin gives them points!
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleRulesToggle}
+              onTouchEnd={handleRulesToggle}
+              className="mt-4 w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer touch-manipulation"
+            >
+              <Check className="w-4 h-4" />
+              <span>Back to Lobby</span>
+            </button>
+          </div>
+        )}
 
         {/* Player Wallet & Match Entry Fee Badge */}
         <div className="mb-4 p-3 bg-gradient-to-r from-amber-950/80 via-slate-900 to-indigo-950/80 border border-amber-500/50 rounded-xl flex items-center justify-between text-xs">
@@ -407,14 +502,18 @@ export const OnlineMatchmakingModal: React.FC<OnlineMatchmakingModalProps> = ({
               {roomCode ? (
                 <div className="space-y-3">
                   <div className="flex items-center gap-2">
-                    <div className="flex-1 bg-slate-900 border border-indigo-500/50 rounded-lg p-2.5 text-center font-mono font-black text-lg tracking-widest text-indigo-300">
+                    <div className="flex-1 bg-slate-900 border border-indigo-500/50 rounded-lg p-2.5 text-center font-mono font-black text-lg tracking-widest text-indigo-300 select-all">
                       {roomCode}
                     </div>
                     <button
+                      type="button"
                       onClick={handleCopyCode}
-                      className="p-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-bold text-xs flex items-center gap-1 cursor-pointer"
+                      onTouchEnd={handleCopyCode}
+                      className="p-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg font-bold text-xs flex items-center gap-1 cursor-pointer touch-manipulation pointer-events-auto"
+                      style={{ pointerEvents: 'auto' }}
+                      title="Copy Code"
                     >
-                      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      {copied ? <Check className="w-4 h-4 text-emerald-300" /> : <Copy className="w-4 h-4" />}
                     </button>
                   </div>
                   {isCreatingRoom && !matchedOpponent && (
@@ -428,8 +527,11 @@ export const OnlineMatchmakingModal: React.FC<OnlineMatchmakingModalProps> = ({
                 </div>
               ) : (
                 <button
+                  type="button"
                   onClick={handleCreateRoom}
-                  className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-lg text-xs cursor-pointer"
+                  onTouchEnd={handleCreateRoom}
+                  className="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black rounded-lg text-xs cursor-pointer touch-manipulation pointer-events-auto shadow-md transition-transform active:scale-95"
+                  style={{ pointerEvents: 'auto' }}
                 >
                   Generate Room Code
                 </button>
@@ -442,18 +544,27 @@ export const OnlineMatchmakingModal: React.FC<OnlineMatchmakingModalProps> = ({
                 <input
                   type="text"
                   maxLength={6}
-                  placeholder="Enter 6-digit Code"
+                  placeholder="ENTER 6-DIGIT CODE"
                   value={inputRoomCode}
-                  onChange={(e) => setInputRoomCode(e.target.value)}
-                  className="flex-1 bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-center font-mono font-bold text-sm text-white focus:outline-none focus:border-indigo-500 uppercase"
+                  onChange={(e) => setInputRoomCode(e.target.value.toUpperCase())}
+                  onTouchStart={(e) => e.stopPropagation()}
+                  onClick={(e) => e.stopPropagation()}
+                  autoCapitalize="characters"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  style={{ pointerEvents: 'auto' }}
+                  className="flex-1 bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-center font-mono font-bold text-sm text-white focus:outline-none focus:border-indigo-500 uppercase placeholder:text-slate-600 pointer-events-auto"
                 />
                 <button
-                  disabled={inputRoomCode.trim().length < 6}
+                  type="button"
+                  disabled={inputRoomCode.trim().length < 4}
                   onClick={handleJoinRoom}
-                  className={`px-4 py-2.5 font-bold rounded-lg text-xs ${
-                    inputRoomCode.trim().length === 6
-                      ? 'bg-emerald-600 hover:bg-emerald-500 text-white cursor-pointer'
-                      : 'bg-slate-700 text-slate-500 cursor-not-allowed'
+                  onTouchEnd={handleJoinRoom}
+                  style={{ pointerEvents: 'auto' }}
+                  className={`px-4 py-2.5 font-black rounded-lg text-xs touch-manipulation pointer-events-auto transition-transform active:scale-95 ${
+                    inputRoomCode.trim().length >= 4
+                      ? 'bg-emerald-600 hover:bg-emerald-500 text-white cursor-pointer shadow-md'
+                      : 'bg-slate-700 text-slate-500 cursor-not-allowed opacity-60'
                   }`}
                 >
                   Join
