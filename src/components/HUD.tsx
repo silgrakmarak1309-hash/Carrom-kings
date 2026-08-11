@@ -37,7 +37,6 @@ export const HUD: React.FC<HUDProps> = ({
   queenOwner,
   queenCoverNeeded,
   isMuted,
-  playerCoins = 100,
   profileImage = null,
   puzzleLevel,
   puzzleShotsLeft = 0,
@@ -67,16 +66,25 @@ export const HUD: React.FC<HUDProps> = ({
     return 'Queen: ON BOARD';
   };
 
+  const handleAction = (action: () => void) => (e: React.MouseEvent | React.TouchEvent) => {
+    e.stopPropagation();
+    if (e.type === 'touchend') {
+      e.preventDefault();
+    }
+    action();
+  };
+
   return (
     <div
-      className="w-full max-w-xl mx-auto mb-2 px-3 py-2 bg-slate-900/90 backdrop-blur-md border border-slate-700/60 rounded-xl shadow-xl flex items-center justify-between text-slate-100 gap-2 relative z-30 pointer-events-auto"
-      style={{ pointerEvents: 'auto' }}
+      className="w-full max-w-xl mx-auto mb-2 px-3 py-2 bg-slate-900/90 backdrop-blur-md border border-slate-700/60 rounded-xl shadow-xl flex items-center justify-between text-slate-100 gap-2 relative z-[10000] pointer-events-auto select-none"
+      style={{ position: 'relative', zIndex: 10000, pointerEvents: 'auto' }}
     >
       {/* Back to Dashboard Button */}
       <button
         type="button"
-        onClick={onBackToDashboard}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700/80 font-black text-xs rounded-lg transition-transform active:scale-95 cursor-pointer shadow-sm shrink-0 pointer-events-auto relative z-30"
+        onClick={handleAction(onBackToDashboard)}
+        onTouchEnd={handleAction(onBackToDashboard)}
+        className="flex items-center gap-1.5 px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-slate-200 border border-slate-700/80 font-black text-xs rounded-lg transition-transform active:scale-95 cursor-pointer shadow-sm shrink-0 pointer-events-auto relative z-[10001] touch-manipulation"
         style={{ pointerEvents: 'auto' }}
         title="Return to Dashboard"
       >
@@ -85,11 +93,13 @@ export const HUD: React.FC<HUDProps> = ({
       </button>
 
       {/* Player 1 Profile & Stats */}
-      <div className="flex items-center gap-2 pr-2 border-r border-slate-800">
+      <div className="flex items-center gap-2 pr-2 border-r border-slate-800 relative z-[10001] pointer-events-auto">
         <button
           type="button"
-          onClick={onOpenProfile}
-          className="relative w-8 h-8 rounded-full border-2 border-amber-400 overflow-hidden bg-slate-800 flex items-center justify-center shrink-0 transition-transform active:scale-95 shadow-md cursor-pointer hover:border-amber-300"
+          onClick={handleAction(onOpenProfile)}
+          onTouchEnd={handleAction(onOpenProfile)}
+          className="relative w-8 h-8 rounded-full border-2 border-amber-400 overflow-hidden bg-slate-800 flex items-center justify-center shrink-0 transition-transform active:scale-95 shadow-md cursor-pointer hover:border-amber-300 pointer-events-auto z-[10001] touch-manipulation"
+          style={{ pointerEvents: 'auto' }}
           title="Open Player Profile"
         >
           {profileImage ? (
@@ -148,11 +158,13 @@ export const HUD: React.FC<HUDProps> = ({
       )}
 
       {/* Action Controls */}
-      <div className="flex items-center gap-1.5 pl-2 border-l border-slate-800">
+      <div className="flex items-center gap-1.5 pl-2 border-l border-slate-800 relative z-[10001] pointer-events-auto">
         <button
           type="button"
-          onClick={onToggleMute}
-          className="p-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-transform active:scale-95 cursor-pointer"
+          onClick={handleAction(onToggleMute)}
+          onTouchEnd={handleAction(onToggleMute)}
+          className="p-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-slate-300 transition-transform active:scale-95 cursor-pointer pointer-events-auto z-[10001] touch-manipulation"
+          style={{ pointerEvents: 'auto' }}
           title="Toggle Audio"
         >
           {isMuted ? <VolumeX className="w-4 h-4 text-red-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
@@ -160,8 +172,10 @@ export const HUD: React.FC<HUDProps> = ({
 
         <button
           type="button"
-          onClick={onOpenRules}
-          className="p-1.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-slate-300 transition-transform active:scale-95 cursor-pointer"
+          onClick={handleAction(onOpenRules)}
+          onTouchEnd={handleAction(onOpenRules)}
+          className="p-1.5 bg-slate-800 hover:bg-slate-700 active:bg-slate-600 rounded-lg text-slate-300 transition-transform active:scale-95 cursor-pointer pointer-events-auto z-[10001] touch-manipulation"
+          style={{ pointerEvents: 'auto' }}
           title="Rules & How to Play"
         >
           <HelpCircle className="w-4 h-4" />
@@ -169,8 +183,10 @@ export const HUD: React.FC<HUDProps> = ({
 
         <button
           type="button"
-          onClick={onOpenModeSelect}
-          className="flex items-center gap-1 px-2.5 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs rounded-lg transition-transform active:scale-95 shadow-md cursor-pointer"
+          onClick={handleAction(onOpenModeSelect)}
+          onTouchEnd={handleAction(onOpenModeSelect)}
+          className="flex items-center gap-1 px-2.5 py-1.5 bg-amber-500 hover:bg-amber-400 active:bg-amber-300 text-slate-950 font-black text-xs rounded-lg transition-transform active:scale-95 shadow-md cursor-pointer pointer-events-auto z-[10001] touch-manipulation"
+          style={{ pointerEvents: 'auto' }}
           title="Game Modes"
         >
           <Gamepad2 className="w-4 h-4" />
