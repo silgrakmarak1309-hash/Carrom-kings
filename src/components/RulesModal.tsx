@@ -9,15 +9,28 @@ interface RulesModalProps {
 export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
+  const handleClose = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onClose();
+  };
+
   return (
     <div
-      className="fixed inset-0 z-[9999] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 pointer-events-auto"
+      className="fixed inset-0 z-[25000] bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 pointer-events-auto"
       style={{ pointerEvents: 'auto' }}
     >
-      <div className="w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl p-6 shadow-2xl text-slate-100 relative max-h-[85vh] overflow-y-auto pointer-events-auto z-[9999]">
+      <div
+        className="w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl p-6 shadow-2xl text-slate-100 relative max-h-[85vh] overflow-y-auto pointer-events-auto z-[25000]"
+        style={{ pointerEvents: 'auto' }}
+      >
         <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-1.5 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-lg"
+          type="button"
+          onClick={handleClose}
+          onTouchEnd={handleClose}
+          className="absolute top-4 right-4 p-2 bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white rounded-lg cursor-pointer pointer-events-auto z-[25000] touch-manipulation"
+          style={{ pointerEvents: 'auto' }}
+          title="Close Rules"
         >
           <X className="w-5 h-5" />
         </button>
@@ -50,8 +63,11 @@ export const RulesModal: React.FC<RulesModalProps> = ({ isOpen, onClose }) => {
         </div>
 
         <button
-          onClick={onClose}
-          className="w-full mt-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-lg"
+          type="button"
+          onClick={handleClose}
+          onTouchEnd={handleClose}
+          className="w-full mt-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-lg cursor-pointer pointer-events-auto z-[25000] touch-manipulation"
+          style={{ pointerEvents: 'auto' }}
         >
           <CheckCircle2 className="w-4 h-4" />
           <span>Got it, Let's Play!</span>

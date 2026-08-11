@@ -953,6 +953,13 @@ export default function App() {
     setTimeout(() => setActiveReaction(null), 2500);
   };
 
+  // Trigger Interstitial Ad when a game match or level is completed
+  useEffect(() => {
+    if (gameOverText) {
+      showInterstitialAd();
+    }
+  }, [gameOverText]);
+
   // Return to Dashboard safely stopping current physics/AI state
   const handleBackToDashboard = useCallback(() => {
     if (mode === 'online' && onlineSession) {
