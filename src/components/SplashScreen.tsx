@@ -59,7 +59,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
 
         {/* Game Title with Golden Glow */}
         <h1 className="text-4xl sm:text-5xl font-black tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 drop-shadow-[0_4px_16px_rgba(245,158,11,0.5)] mb-1 uppercase">
-          STRIKER WAR
+          STRIKER WAR PRO
         </h1>
 
         <p className="text-xs sm:text-sm font-extrabold text-amber-300/80 tracking-widest uppercase mb-8 flex items-center justify-center gap-1.5">
@@ -106,7 +106,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onFinish }) => {
 
       {/* Footer Branding */}
       <div className="pb-2 text-[10px] font-bold text-slate-500 tracking-widest uppercase">
-        © 2026 STRIKER WAR MULTIPLAYER • ALL RIGHTS RESERVED
+        © 2026 STRIKER WAR PRO MULTIPLAYER • ALL RIGHTS RESERVED
       </div>
     </div>
   );

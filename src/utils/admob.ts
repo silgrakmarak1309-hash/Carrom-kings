@@ -1,4 +1,4 @@
-// AdMob Configuration & Service Manager for Striker War
+// AdMob Configuration & Service Manager for Striker War Pro
 
 export const ADMOB_CONFIG = {
   appId: 'ca-app-pub-4647188052127146~4344366810',

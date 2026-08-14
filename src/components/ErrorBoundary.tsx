@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<Props, State> {
           <div className="w-16 h-16 bg-amber-500/20 border border-amber-500/40 rounded-2xl flex items-center justify-center mb-4 text-3xl">
             🎯
           </div>
-          <h1 className="text-2xl font-black text-amber-400 mb-2">STRIKER WAR</h1>
+          <h1 className="text-2xl font-black text-amber-400 mb-2">STRIKER WAR PRO</h1>
           <p className="text-sm text-slate-300 mb-6 max-w-md">
             Something went wrong while rendering the game interface.
           </p>

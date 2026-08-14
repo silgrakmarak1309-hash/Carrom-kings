@@ -35,7 +35,7 @@ export const CrownLogo: React.FC<CrownLogoProps> = ({ className = '', size = 'md
         {!imgError ? (
           <img
             src={strikerWarIconImg}
-            alt="Striker War Logo"
+            alt="Striker War Pro Logo"
             onError={() => setImgError(true)}
             className="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-300 rounded-full"
           />

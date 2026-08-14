@@ -746,7 +746,7 @@ export default function App() {
           if (updatedP1Score >= updatedP2Score) {
             audio.playVictorySound();
             handleAddCoins(40);
-            setGameOverText('STRIKER WAR! YOU WON THE PRIZE POOL 🏆');
+            setGameOverText('STRIKER WAR PRO! YOU WON THE PRIZE POOL 🏆');
           } else {
             audio.playFoulSound();
             setGameOverText('YOU LOST THE MATCH ❌');

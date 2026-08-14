@@ -1,6 +1,6 @@
 {
   "name": "Remix Carrom Pro",
-  "description": "A professional, realistic Carrom game with single player, vs CPU, puzzle, and practice modes.",
+  "description": "Striker War Pro - A professional, realistic multiplayer Carrom game with real-time matchmaking, single player, vs CPU, puzzle, and practice modes.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
