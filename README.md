@@ -1,6 +1,6 @@
-# CARROM KING 👑
+# STRIKER WAR 👑
 
-**CARROM KING** is a modern, responsive, high-performance Carrom board web game built with React, TypeScript, Canvas 2D, and Tailwind CSS. It features realistic 2D physics, accurate coin/goti collision detection, customizable striker controls, AI opponents, puzzle trick shots, pass-and-play 2 player mode, sound effects, player profiles, and responsive touch controls for mobile, tablet, and desktop.
+**STRIKER WAR** is a modern, responsive, high-performance Carrom board web game built with React, TypeScript, Canvas 2D, and Tailwind CSS. It features realistic 2D physics, accurate coin/goti collision detection, customizable striker controls, AI opponents, puzzle trick shots, pass-and-play 2 player mode, sound effects, player profiles, and responsive touch controls for mobile, tablet, and desktop.
 
 ---
 
@@ -42,7 +42,7 @@ Make sure you have Node.js (v18 or higher) and `npm` or `bun` installed on your 
    npm run dev
    ```
 
-4. Open your browser at `http://localhost:3000` to play CARROM KING!
+4. Open your browser at `http://localhost:3000` to play STRIKER WAR!
 
 ---
 

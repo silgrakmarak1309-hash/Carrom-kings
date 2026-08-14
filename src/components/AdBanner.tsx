@@ -48,7 +48,7 @@ export const AdBanner: React.FC<AdBannerProps> = ({ className = '' }) => {
         <span className="px-1.5 py-0.5 bg-amber-500/20 border border-amber-500/40 text-amber-300 rounded text-[9px] font-black uppercase">
           SPONSORED
         </span>
-        <span className="text-[11px] font-bold text-slate-300">CARROM KING PRO CHAMPIONSHIP</span>
+        <span className="text-[11px] font-bold text-slate-300">STRIKER WAR PRO CHAMPIONSHIP</span>
       </div>
       <span className="text-[10px] text-amber-400 font-extrabold flex items-center gap-1">
         <span>🏆 WIN REWARDS</span>

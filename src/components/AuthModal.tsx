@@ -255,7 +255,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                       type="text"
                       value={displayName}
                       onChange={(e) => setDisplayName(e.target.value)}
-                      placeholder="e.g. CarromKing"
+                      placeholder="e.g. StrikerWar"
                       className="w-full pl-9 pr-3 py-2 bg-slate-800 border border-slate-700 rounded-xl text-xs font-bold text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
                     />
                   </div>

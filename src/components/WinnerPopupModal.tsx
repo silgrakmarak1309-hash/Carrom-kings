@@ -173,7 +173,7 @@ export const WinnerPopupModal: React.FC<WinnerPopupModalProps> = ({
                 transition={{ delay: 0.1 }}
                 className="text-3xl font-black tracking-tight text-amber-400 drop-shadow-[0_2px_10px_rgba(251,191,36,0.5)]"
               >
-                CARROM KING! 🎉
+                STRIKER WAR! 🎉
               </motion.h2>
             ) : isAiWin || isPuzzleFailed ? (
               <motion.h2

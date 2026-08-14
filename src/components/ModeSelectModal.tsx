@@ -107,7 +107,7 @@ export const ModeSelectModal: React.FC<ModeSelectModalProps> = ({
               <CrownLogo size="sm" />
               <h2 className="text-xl font-black text-amber-400 tracking-tight text-center">SELECT GAME MODE</h2>
             </div>
-            <p className="text-xs text-slate-400 text-center mb-4">Choose your preferred Carrom King match mode</p>
+            <p className="text-xs text-slate-400 text-center mb-4">Choose your preferred Striker War match mode</p>
 
             {/* 2x2 Grid for first 4 modes */}
             <div className="grid grid-cols-2 gap-3 mb-3">

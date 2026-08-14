@@ -206,7 +206,7 @@ export const OnlineMatchmakingModal: React.FC<OnlineMatchmakingModalProps> = ({
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
               </h2>
-              <p className="text-[11px] text-slate-400">Carrom King Real-Time Matchmaking</p>
+              <p className="text-[11px] text-slate-400">Striker War Real-Time Matchmaking</p>
             </div>
           </div>
 

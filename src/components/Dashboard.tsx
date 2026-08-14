@@ -59,7 +59,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
           <CrownLogo size="md" />
           <div>
             <h1 className="text-base sm:text-lg font-black tracking-wider text-amber-400 leading-none flex items-center gap-1.5">
-              <span>CARROM KING</span>
+              <span>STRIKER WAR</span>
             </h1>
             <p className="text-[9px] sm:text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">
               Pro Carrom Board
